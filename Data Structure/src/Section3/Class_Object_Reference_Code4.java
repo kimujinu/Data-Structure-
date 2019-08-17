@@ -1,4 +1,5 @@
-package Section2;
+package Section3;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -6,15 +7,17 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-public class String_code2 {
+
+public class Class_Object_Reference_Code4 {
 
 	Scanner scan = new Scanner(System.in);
-	String[] words = new String[100000];
-	int[] count = new int[100000];
+	Item [] item = new Item[100000];
+//	String[] words = new String[100000];
+//	int[] count = new int[100000];
 	int n = 0;
 	
 	public static void main(String[] args) {
-		String_code2 Main = new String_code2();
+		Class_Object_Reference_Code4 Main = new Class_Object_Reference_Code4();
 		Main.start();
 	}
 	
@@ -35,7 +38,7 @@ public class String_code2 {
 				String str = scan.next();
 				int index = findword(str);
 				if(index > -1) {
-					System.out.println("The word "+ words[index] + " appears "+ count[index]+ " times");
+					System.out.println("The word "+ item[index].word + " appears "+ item[index].count+ " times");
 				}else {
 					System.out.println("The word "+ str + " does not appear");
 				}
@@ -71,23 +74,23 @@ public class String_code2 {
 	public void addword(String str) {
 		int index = findword(str); //return -1 if not found
 		if(index != -1) { //found word[index] == str
-			count[index]++;
+			item[index].count++;
 		}else { //not found
 			int i =n-1;
-			while(i>=0 && words[i].compareToIgnoreCase(str)>0) {
-				words[i+1] = words[i];
-				count[i+1] = count[i];
+			while(i>=0 && item[i].word.compareToIgnoreCase(str)>0) {
+				item[i+1] = item[i];
 				i--;
 			}
-			words[i+1] = str;
-			count[i+1] = 1;
+			item[i+1] = new Item();
+			item[i+1].word = str;
+			item[i+1].count = 1;
 			n++;
 		}
 		
 	}
 	public int findword(String str) {
 		for(int i = 0;i<n;i++) {
-			if(words[i].equalsIgnoreCase(str)) {
+			if(item[i].word.equalsIgnoreCase(str)) {
 				return i;
 			}
 		}
@@ -98,7 +101,7 @@ public class String_code2 {
 		try {
 			 outFile = new PrintWriter(new FileWriter(FileName));
 			for(int i=0;i<n;i++) {
-				outFile.println(words[i]+" "+count[i]);
+				outFile.println(item[i].word+" "+item[i].count);
 			}
 			outFile.close();
 		} catch (IOException e) {
@@ -120,5 +123,4 @@ public class String_code2 {
 		}
 		return str.substring(i,j+1);
 	}
-
 }
