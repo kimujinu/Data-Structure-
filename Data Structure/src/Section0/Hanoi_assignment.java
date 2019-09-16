@@ -21,10 +21,10 @@ public class Hanoi_assignment { //201730198 김진우 과제.
 	public void hanoi(int n,String start,String work,String target) {
 		
 		if(n==1) { //Basecase 재귀 탈출구간
-			System.out.println(start+"원판  1를(을)"+target+"로 옮김");
+			System.out.println(start+"에서 원판  1를(을)"+target+"로 옮김");
 		}else {
 			hanoi(n-1,start,target,work);
-			System.out.println(start+"원판 "+n+"를(을)"+target+"로 옮김");
+			System.out.println(start+"에서 원판 "+n+"를(을)"+target+"로 옮김");
 			hanoi(n-1,work,start,target);
 		}
 	}
