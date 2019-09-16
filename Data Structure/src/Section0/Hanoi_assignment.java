@@ -4,24 +4,20 @@ public class Hanoi_assignment { //201730198 ±èÁø¿ì °úÁ¦.
 	String start;
 	String work;
 	String target;
-	
 	public static void main(String[] args) {
 		Hanoi_assignment Main = new Hanoi_assignment();
 		Main.start();
 	}
-	
 	public void start() {
 		solve();
 		}
-		  
 	public void solve() {
 		start = "A";
 		work = "B";
 		target = "C";
 		
-		hanoi(5,start,work,target);
+		hanoi(3,start,work,target);
 	}
-	
 	public void hanoi(int n,String start,String work,String target) {
 		
 		if(n==1) { //Basecase Àç±Í Å»Ãâ±¸°£
