@@ -37,7 +37,7 @@ public class SingleLinkedlist_Basic<T> {
 		Node<T> newNode = new Node<T>(item); // T : type parameter
 		newNode.next = head;
 		head = newNode;
-		
+		size++;
 	}
 
 	public void add(int index, T item) { //insert
