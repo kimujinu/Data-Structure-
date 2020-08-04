@@ -21,17 +21,32 @@ public class Linked_List {
 		numbers.addFirst(10); //2
 		numbers.addFirst(30); //1
 		numbers.addFirst(20); //0
-		numbers.addLast(50); //3
-		numbers.add(2, 25); // 2번째 자리에 25삽입
-		System.out.println(numbers.node(2));
+//		numbers.addLast(50); //3
+//		numbers.add(2, 25); // 2번째 자리에 25삽입
+//		System.out.println(numbers.node(2));
+//		System.out.println(numbers);
+//		numbers.removeFirst();
+//		System.out.println(numbers);
+//		System.out.println(numbers.remove(1));
+//		System.out.println(numbers);
+//		System.out.println(numbers.removeLast());
+//		System.out.println(numbers);
+//		System.out.println(numbers.indexOf(30));
+		
+		LinkedList.ListIterator i = numbers.listIterator();
+//		while(i.hasNext()){
+//		    System.out.println(i.next());
+//		}
+//		i.add(5);
+//		i.next();
+//		i.add(15);
+//		System.out.println(numbers);
+		while(i.hasNext()) {
+			if((int)i.next()==20) {
+				i.remove();
+			}
+		}
 		System.out.println(numbers);
-		numbers.removeFirst();
-		System.out.println(numbers);
-		System.out.println(numbers.remove(1));
-		System.out.println(numbers);
-		System.out.println(numbers.removeLast());
-		System.out.println(numbers);
-		System.out.println(numbers.indexOf(30));
 	}
 }
 
@@ -154,7 +169,7 @@ public class Linked_List {
     	return temp.data;
     }
     
-    public int indexOf(Object data) {
+    public int indexOf(Object data) { // 특정값을 가진 엘리먼트의 인덱스 값을 추출하는 메소드
     	Node temp = head; // 탐색 대상이 되는 노드를 temp로 지정합니다.
     	int index = 0;// 탐색 대상이 몇번째 엘리먼트에 있는지를 의미하는 변수로 index를 사용합니다.
     	while(temp.data != data) {  // 탐색 값과 탐색 대상의 값을 비교합니다.
@@ -168,5 +183,52 @@ public class Linked_List {
     	return index; // 탐색 대상을 찾았다면 대상의 인덱스 값을 리턴합니다.
     }
     
-    //todo Iterator
+    public ListIterator listIterator() {
+    	return new ListIterator();
+    }
+    
+    class ListIterator{
+    	private Node next;
+    	private Node lastReturned;
+    	private int nextIndex;
+    	
+    	ListIterator(){
+    		next = head;
+    	}
+    	
+    	public Object next() {
+    		lastReturned = next;
+    		next = next.next;
+    		nextIndex++;
+    		return lastReturned.data;
+    	}
+    	
+    	public boolean hasNext() {
+    		return nextIndex < size();
+    	}
+    	
+    	public void add(Object input) {
+    		Node newNode = new Node(input);
+    		if(lastReturned == null) {
+    			head = newNode;
+    			newNode.next = next;
+    		}else {
+    			lastReturned.next = newNode;
+    			newNode.next = next;
+    		}
+    		
+    		lastReturned = newNode;
+    		nextIndex++;
+    		size++;
+    	}
+    	
+    	public void remove() {
+    		if(nextIndex == 0) {
+    			throw new IllegalStateException();
+    		}
+    		
+    		LinkedList.this.remove(nextIndex-1);
+    		nextIndex--;
+    	}
+    }
 }
